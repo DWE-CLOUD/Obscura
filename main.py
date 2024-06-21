@@ -33,7 +33,7 @@ APPROVED_USERS_FILE = 'approved_users.json'
 ADMIN_USER_ID = [5457445535,5737829871,5589703594,1068646598,660344203,1131430680,1047973309]
 
 def send_ping():
-    bot_token = '5974141504:AAF9VxRP-4Vc7opjrj_T7SNQDxCpd1uezJ0'
+    bot_token = 'BOT TOKEN'
     while True:
         try:
             response = requests.get(f'https://api.telegram.org/bot{bot_token}/getMe')
@@ -1400,7 +1400,7 @@ def payu_donate_command(update: Update, context: CallbackContext):
 
     threading.Thread(target=payu_process_donation, args=(update, context, card_details)).start()
 def main():
-    updater = Updater('5974141504:AAF9VxRP-4Vc7opjrj_T7SNQDxCpd1uezJ0', use_context=True)
+    updater = Updater('BOT TOKEN', use_context=True)
     dp = updater.dispatcher
     dp.add_handler(CommandHandler("c", cc_command))
     dp.add_handler(CommandHandler("approve", approve_command))

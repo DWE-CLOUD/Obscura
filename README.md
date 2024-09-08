@@ -34,17 +34,17 @@ Welcome to **`Project Obscura`**. An advanced, tech-forward Telegram bot designe
 1. **Clone the Repository**:
 
    ```bash
-   git clone https://github.com/ctrhyz/Obscura.git obscura
+   git clone https://github.com/ctrhyz/Obscura obscura
    cd obscura
    ```
 
 2. **Install Dependencies**:
 
-   Use pip to install the necessary packages:
+   + Use pip to install the necessary packages:
    ```bash
    pip install -U -r requirements.txt
    ```
-   Install Microsoft Edge from this repository
+   + Install Microsoft Edge from this repository
 
 
 3. **Setup Configuration**:

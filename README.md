@@ -30,8 +30,8 @@ Welcome to **`Project Obscura`**. An advanced, tech-forward Telegram bot designe
 - **Telegram Bot API Token** for interacting with users.
 
 ### 📥 Installation
-
-#### Install in RDP with fast enough internet 
+>[!IMPORTANT]
+>Install in RDP with fast enough internet will be better. You can still run in your local >computer, but it will be slower and laggy 
 
 1. **Clone the Repository**:
 
@@ -42,12 +42,10 @@ Welcome to **`Project Obscura`**. An advanced, tech-forward Telegram bot designe
 
 2. **Install Dependencies**:
 
-   - Use pip to install the necessary packages:
-   
-   ```bash
-   pip install -U -r requirements.txt
-   ```
+   - Use pip to install the necessary packages: `pip3 install -U -r requirements.txt`
+
    - Install Microsoft Edge from this repository
+      - If you have installed Microsoft Edge, make sure your version is in stable `128.0.2739.67`
 
 
 3. **Setup Configuration**:

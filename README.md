@@ -2,7 +2,7 @@
 ![wallpapersden com_obito-uchiha-cool-4k_3644x2049](https://github.com/user-attachments/assets/99954979-0d76-4f90-a28d-56ee6ae23120)
 
 
-Welcome to **Project Obscura**—an advanced, tech-forward Telegram bot designed for seamless and efficient payment testing across multiple gateways. Whether you’re working with Stripe, PayPal, Shopify, Razorpay, PayU, or Mass Stripe, Project Obscura has you covered with its asynchronous capabilities and robust load handling. This bot ensures your payment processing tasks are handled smoothly, without risking IP bans, and integrates NopeCHA for automated CAPTCHA solving.
+Welcome to **`Project Obscura`** an advanced, tech-forward Telegram bot designed for seamless and efficient payment testing across multiple gateways. Whether you’re working with Stripe, PayPal, Shopify, Razorpay, PayU, or Mass Stripe, Project Obscura has you covered with its asynchronous capabilities and robust load handling. This bot ensures your payment processing tasks are handled smoothly, without risking IP bans, and integrates NopeCHA for automated CAPTCHA solving.
 
 ## 🚀 Features
 
@@ -41,8 +41,11 @@ Welcome to **Project Obscura**—an advanced, tech-forward Telegram bot designed
 2. **Install Dependencies**:
 
    Use pip to install the necessary packages:
+   `pip install -U -r requirements.txt`
 
-   Add all the Necessary Values like admin list user ids and the telegram bot token
+3. **Setup Configuration**:
+
+   Open `main.py` in your IDE and edit 
 
 4. **Run the Bot**:
 

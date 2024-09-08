@@ -31,6 +31,8 @@ Welcome to **`Project Obscura`**. An advanced, tech-forward Telegram bot designe
 
 ### 📥 Installation
 
+#### Install in RDP with fast enough internet 
+
 1. **Clone the Repository**:
 
    ```bash
@@ -40,11 +42,11 @@ Welcome to **`Project Obscura`**. An advanced, tech-forward Telegram bot designe
 
 2. **Install Dependencies**:
 
-   + Use pip to install the necessary packages:
-   ```bash
+   - Use pip to install the necessary packages:
+   - ```bash
    pip install -U -r requirements.txt
    ```
-   + Install Microsoft Edge from this repository
+   - Install Microsoft Edge from this repository
 
 
 3. **Setup Configuration**:

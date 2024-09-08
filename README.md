@@ -30,8 +30,10 @@ Welcome to **`Project Obscura`**. An advanced, tech-forward Telegram bot designe
 - **Telegram Bot API Token** for interacting with users.
 
 ### 📥 Installation
+
 >[!IMPORTANT]
->Install in RDP with fast enough internet will be better. You can still run in your local >computer, but it will be slower and laggy 
+>Only for **WINDOWS**.
+>Install in RDP with fast enough internet will be better. You can still run in your local computer, but it will be slower.
 
 1. **Clone the Repository**:
 

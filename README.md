@@ -86,6 +86,6 @@ All contributions are appreciated, and we’ll review and merge them promptly!
 ## 📢 Acknowledgments
 
 A big thank you to all anonymous that power Project Obscura:
-- (ZxhCarkecor)[https://t.me/ZxhCarkecor] | (ctrhyz)[https://github.com/ctrhyz]
+- [ZxhCarkecor](https://t.me/ZxhCarkecor) | [ctrhyz](https://github.com/ctrhyz)
 
 ---

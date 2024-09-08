@@ -44,8 +44,8 @@ Welcome to **`Project Obscura`**. An advanced, tech-forward Telegram bot designe
 
    - Use pip to install the necessary packages:
    - ```bash
-   pip install -U -r requirements.txt
-   ```
+   - pip install -U -r requirements.txt
+   - ```
    - Install Microsoft Edge from this repository
 
 

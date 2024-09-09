@@ -12,6 +12,7 @@ from faker import Faker
 import time
 from colorama import init, Fore, Style
 import requests
+import urllib3
 import selenium
 import json
 import string
@@ -24,16 +25,17 @@ from requests.auth import HTTPProxyAuth
 
 nopecha.api_key = 'NOPECHA_KEY'
 
-
+btoken = ""
+dpath = cwd = os.getcwd() + "\\msedgedriver.exe"
 
 # Initialize colorama for colored output
 init(autoreset=True)
 
 APPROVED_USERS_FILE = 'approved_users.json'
-ADMIN_USER_ID = [5457445535,5737829871,5589703594,1068646598,660344203,1131430680,1047973309]
+ADMIN_USER_ID = [1170716131]
 
 def send_ping():
-    bot_token = 'BOT_TOKEN'
+    bot_token = btoken
     while True:
         try:
             response = requests.get(f'https://api.telegram.org/bot{bot_token}/getMe')
@@ -46,7 +48,7 @@ def send_ping():
         time.sleep(20)
 
 def c_web():
-    driver_path = 'C:\\Users\\vnx\\Desktop\\msedgedriver.exe'
+    driver_path = dpath
     options = Options()
     #options.add_argument('--headless')  # Headless mode for reduced resource usage
     #options.add_argument('--disable-gpu')
@@ -1430,7 +1432,7 @@ def payu_donate_command(update: Update, context: CallbackContext):
 
     threading.Thread(target=payu_process_donation, args=(update, context, card_details)).start()
 def main():
-    updater = Updater('BOT_TOKEN', use_context=True)
+    updater = Updater('btoken', use_context=True)
     dp = updater.dispatcher
     dp.add_handler(CommandHandler("c", cc_command))
     dp.add_handler(CommandHandler("approve", approve_command))

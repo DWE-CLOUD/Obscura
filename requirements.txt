@@ -1,6 +1,5 @@
 requests
 telegram
-urllib3
 selenium
 faker
 urllib3==1.26.15

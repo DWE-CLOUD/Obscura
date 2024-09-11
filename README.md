@@ -2,7 +2,7 @@
 ![wallpapersden com_obito-uchiha-cool-4k_3644x2049](https://github.com/user-attachments/assets/99954979-0d76-4f90-a28d-56ee6ae23120)
 
 
-Welcome to **Project Obscura**—an advanced, tech-forward Telegram bot designed for seamless and efficient payment testing across multiple gateways. Whether you’re working with Stripe, PayPal, Shopify, Razorpay, PayU, or Mass Stripe, Project Obscura has you covered with its asynchronous capabilities and robust load handling. This bot ensures your payment processing tasks are handled smoothly, without risking IP bans, and integrates NopeCHA for automated CAPTCHA solving.
+Welcome to **`Project Obscura`**. An advanced, tech-forward Telegram bot designed for seamless and efficient payment testing across multiple gateways. Whether you’re working with Stripe, PayPal, Shopify, or Mass Stripe, Project Obscura has you covered with its asynchronous capabilities and robust load handling. This bot ensures your payment processing tasks are handled smoothly, without risking IP bans, and integrates NopeCHA for automated CAPTCHA solving.
 
 ## 🚀 Features
 
@@ -10,8 +10,6 @@ Welcome to **Project Obscura**—an advanced, tech-forward Telegram bot designed
   - **Stripe**
   - **PayPal**
   - **Shopify**
-  - **Razorpay**
-  - **PayU**
   - **Mass Stripe**
   
 - **⚡ Asynchronous Operations**: Execute multiple payment operations simultaneously with asynchronous handling, ensuring high efficiency and speed.
@@ -31,25 +29,36 @@ Welcome to **Project Obscura**—an advanced, tech-forward Telegram bot designed
 
 ### 📥 Installation
 
+>[!IMPORTANT]
+>Only for **WINDOWS 64 BIT**.
+>Install in RDP with fast enough internet will be better. You can still run in your local computer, but it will be slower.
+
 1. **Clone the Repository**:
 
    ```bash
-   git clone https://github.com/yourusername/project-obscura.git
-   cd project-obscura
+   git clone https://github.com/ctrhyz/Obscura obscura
+   cd obscura
    ```
 
 2. **Install Dependencies**:
 
-   Use pip to install the necessary packages:
+   - Use pip to install the necessary packages: `pip3 install -U -r requirements.txt`
 
-   Add all the Necessary Values like admin list user ids and the telegram bot token
+   - Install Microsoft Edge ver `stable 128.0.2739.67`
+      - If you have installed Microsoft Edge, make sure your version is in stable `128.0.2739.67`
+
+
+3. **Setup Configuration**:
+
+   Open `main.py` in your IDE and edit important sections such as `bot_token` and others.
+
 
 4. **Run the Bot**:
 
    Start your bot with:
 
    ```bash
-   python bot.py
+   python3 main.py
    ```
 
 ## 💡 Usage
@@ -75,5 +84,6 @@ All contributions are appreciated, and we’ll review and merge them promptly!
 ## 📢 Acknowledgments
 
 A big thank you to all anonymous that power Project Obscura:
+- [ZxhCarkecor](https://t.me/ZxhCarkecor) | [ctrhyz](https://github.com/ctrhyz)
 
 ---

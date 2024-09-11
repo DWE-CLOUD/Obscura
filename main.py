@@ -12,6 +12,7 @@ from faker import Faker
 import time
 from colorama import init, Fore, Style
 import requests
+import urllib3
 import selenium
 import json
 import string
@@ -24,16 +25,21 @@ from requests.auth import HTTPProxyAuth
 
 nopecha.api_key = 'NOPECHA_KEY'
 
+########################################################################
+# IMPORTANT | MUST FILL WITH YOUR BOT TOKEN FROM BOT_FATHER
+btoken = ""
+########################################################################
 
+dpath = cwd = os.getcwd() + "\\msedgedriver.exe"
 
 # Initialize colorama for colored output
 init(autoreset=True)
 
 APPROVED_USERS_FILE = 'approved_users.json'
-ADMIN_USER_ID = [5457445535,5737829871,5589703594,1068646598,660344203,1131430680,1047973309]
+ADMIN_USER_ID = [1170716131]
 
 def send_ping():
-    bot_token = 'BOT_TOKEN'
+    bot_token = btoken
     while True:
         try:
             response = requests.get(f'https://api.telegram.org/bot{bot_token}/getMe')
@@ -46,7 +52,7 @@ def send_ping():
         time.sleep(20)
 
 def c_web():
-    driver_path = 'C:\\Users\\vnx\\Desktop\\msedgedriver.exe'
+    driver_path = dpath
     options = Options()
     #options.add_argument('--headless')  # Headless mode for reduced resource usage
     #options.add_argument('--disable-gpu')
@@ -122,15 +128,15 @@ def process_credit_card(update: Update, context: CallbackContext, card_details):
     bin_details = fetch_bin_details(bin_number)
 
     initial_message_template = """
-🔐 *Gateway:* Stripe 10 $ Charge
+🔐 *Stripe 10$*
 
 🚀 *Progress:* {progress}
 
-🤖 *Bot by:* @Dwoscloud
+🤖 >*Bot by:* @ZxhCarkecor
     """
 
     final_message_template = f"""
-🔐 *Gateway:* Stripe 10 $ Charge
+🔐 *Stripe 10$*
 
 💳 *CC:* `{full_cc_details}`
 
@@ -138,7 +144,7 @@ def process_credit_card(update: Update, context: CallbackContext, card_details):
 
 📊 *Result:* {{result}}
 
-🤖 *Bot by:* @Dwoscloud
+🤖 >*Bot by:* @ZxhCarkecor
     """
 
     # Send initial message
@@ -250,7 +256,7 @@ def process_credit_card(update: Update, context: CallbackContext, card_details):
 def cc_command(update: Update, context: CallbackContext):
     user_id = update.message.from_user.id
     if user_id not in approved_users:
-        update.message.reply_text("You are not authorized to use this bot.")
+        update.message.reply_text("You are not authorized to use this bot.\nDM @ZxhCarkecor for help.")
         return
 
     card_details_string = ' '.join(context.args)
@@ -273,7 +279,7 @@ def process_donatekart_payment(update: Update, context: CallbackContext, card_de
 
 🚀 *Progress:* {progress}
 
-🤖 *Bot by:* @Dwoscloud
+🤖 *Bot by:* @ZxhCarkecor
     """
 
     final_message_template = f"""
@@ -285,7 +291,7 @@ def process_donatekart_payment(update: Update, context: CallbackContext, card_de
 
 📊 *Result:* {{result}}
 
-🤖 *Bot by:* @Dwoscloud
+🤖 *Bot by:* @ZxhCarkecor
     """
 
     # Send initial message
@@ -404,7 +410,7 @@ def process_donatekart_payment(update: Update, context: CallbackContext, card_de
 def donatekart_command(update: Update, context: CallbackContext):
     user_id = update.message.from_user.id
     if user_id not in approved_users:
-        update.message.reply_text("You are not authorized to use this bot.")
+        update.message.reply_text("You are not authorized to use this bot.\nDM @ZxhCarkecor for help.")
         return
 
     card_details_string = ' '.join(context.args)
@@ -415,7 +421,7 @@ def donatekart_command(update: Update, context: CallbackContext):
 def approve_command(update: Update, context: CallbackContext):
     user_id = update.message.from_user.id
     if user_id not in ADMIN_USER_ID:
-        update.message.reply_text("You are not authorized to use this command.")
+        update.message.reply_text("You are not authorized to use this command.\nDM @ZxhCarkecor for help.")
         return
 
     if len(context.args) != 1:
@@ -436,7 +442,7 @@ def approve_command(update: Update, context: CallbackContext):
 def revoke_command(update: Update, context: CallbackContext):
     user_id = update.message.from_user.id
     if user_id not in ADMIN_USER_ID:
-        update.message.reply_text("You are not authorized to use this command.")
+        update.message.reply_text("You are not authorized to use this command.\nDM @Zxhcarkecor for help")
         return
 
     if len(context.args) != 1:
@@ -465,15 +471,15 @@ def process_paypal_donation(update: Update, context: CallbackContext, card_detai
     jp = card_details['exp']
 
     initial_message_template = """
-🔐 *Gateway:* PayPal 1 $ Charge
+🔐 *PayPal 1$ Charge*
 
 🚀 *Progress:* {progress}
 
-🤖 *Bot by:* @Dwoscloud
+🤖 *Bot by:* @ZxhCarkecor
     """
 
     final_message_template = f"""
-🔐 *Gateway:* PayPal 1 $ Charge
+🔐 *PayPal 1 $ Charge*
 
 💳 *CC:* `{card_details['cc_number']}|{jp[:2]}|{jp[2:]}|{card_details['cvc']}`
 
@@ -481,7 +487,7 @@ def process_paypal_donation(update: Update, context: CallbackContext, card_detai
 
 📊 *Result:* {{result}}
 
-🤖 *Bot by:* @Dwoscloud
+🤖 *Bot by:* @ZxhCarkecor
     """
 
     # Send initial message
@@ -764,7 +770,7 @@ def process_paypal_donation(update: Update, context: CallbackContext, card_detai
 def pp_command(update: Update, context: CallbackContext):
     user_id = update.message.from_user.id
     if user_id not in approved_users:
-        update.message.reply_text("You are not authorized to use this bot.")
+        update.message.reply_text("You are not authorized to use this bot.\nDM @ZxhCarkecor for the help")
         return
 
     card_details_string = ' '.join(context.args)
@@ -785,15 +791,15 @@ def process_shopify_payment(update: Update, context: CallbackContext, card_detai
     bin_details = fetch_bin_details(bin_number)
 
     initial_message_template = """
-🔐 *Gateway:* Shopify 15$ Gateway
+🔐 *Shopify 15$ Gateway*
 
 🚀 *Progress:* {progress}
 
-🤖 *Bot by:* @Dwoscloud
+🤖 *Bot by:* @ZxhCarkecor
     """
 
     final_message_template = f"""
-🔐 *Gateway:* Shopify 15$ Gateway
+🔐 *Shopify 15$ Gateway*
 
 💳 *CC:* `{full_cc_details}`
 
@@ -801,7 +807,7 @@ def process_shopify_payment(update: Update, context: CallbackContext, card_detai
 
 📊 *Result:* {{result}}
 
-🤖 *Bot by:* @Dwoscloud
+🤖 *Bot by:* @ZxhCarkecor
     """
 
     progress_message = update.message.reply_text(
@@ -919,13 +925,15 @@ def process_shopify_payment(update: Update, context: CallbackContext, card_detai
 
 def start(update: Update, context: CallbackContext) -> None:
     welcome_message = (
-        "🎉 Welcome to Obscura! 😎\n\n"
-        "🚀 Glad you made it here!** Obscura is all about speed and efficiency, just like the legendary Obito. "
-        "Whether you're on a mission or just need a quick check, we've got your back with top-notch accuracy.\n\n"
-        "🙏 Thanks for choosing Obscura. Let’s get things rolling by provisioning my powers using /cmd ! ⚡"
+        "<b>F-ck The World</b>\n\n"
+        "Based on <b><i>Project Obscura</i></b>\n\n"
+        '<i>"The Less You Know The Better"</i>\n'
+        '<i>"Just Let The World Burn"</i>\n\n'
+        "/help for available commands\n\n"
+        "<i>Bot by @ZxhCarkecor</i>\n"
     )
 
-    update.message.reply_text(welcome_message)
+    update.message.reply_text(welcome_message, parse_mode=ParseMode.HTML)
 
 def check_subscription_type(user_id):
     try:
@@ -944,34 +952,24 @@ def info(update: Update, context: CallbackContext) -> None:
     subscription_type = check_subscription_type(user.id)
 
     info_text = (
-        "╔════════════╗\n"
-        "         ℹ️ <b>User Info</b> ℹ️\n"
-        "╚════════════╝\n\n"
+        "         ℹ️ <b>User Info</b> ℹ️\n\n"
         f"🆔 <b>ID:</b> <code>{user.id}</code>\n"
         f"👤 <b>Name:</b> {user.full_name}\n"
         f"🔹 <b>Username:</b> @{user.username}\n"
-        f"💎 <b>Subscription:</b> {subscription_type}\n\n"
-        "╚════════════╝"
+        f"💎 <b>Subscription:</b> {subscription_type}"
     )
 
     update.message.reply_text(info_text, parse_mode=ParseMode.HTML)
 
 def cmd(update: Update, context: CallbackContext) -> None:
     cmd_text = (
-        "🔧 <b>Available Gateways</b> 🔧\n\n"
-        "╔═════════════════╗\n\n"
-        "║ 🚀 /sh : <b>Shopify</b> 15$ ✅️                ║\n\n"
-        "╠═════════════════╣\n\n"
-        "║ 💳 /c   : <b>Stripe</b> 10$ ✅️                   ║\n\n"
-        "╠═════════════════╣\n\n"
-        "║ 💸 /rz : <b>Razorpay</b> 100₹ ✅️           ║\n\n"
-        "╠═════════════════╣\n\n"
-        "║ 💰 /pp : <b>Paypal</b> 1$ ✅️                   ║\n\n"
-        "╠═════════════════╣\n\n"
-        "║ 💵 /py : <b>PayU</b> 200₹ ✅️                  ║\n\n"
-        "╠═════════════════╣\n\n"
-        "║ 🏦 /mchk : <b>Stripe Mass</b> 0.5$ ✅️       ║\n\n"
-        "╚═════════════════╝\n"
+        "🔧 <b>Available Commands</b> 🔧\n\n"
+        "~ /sh : <b>Shopify</b> 15$ ✅️\n"
+        "~ /c   : <b>Stripe</b> 10$ ✅️\n"
+        "~ /pp : <b>Paypal</b> 1$ ✅️\n"
+        "~ /mchk : <b>Stripe Mass</b> 0.5$ ✅️\n"
+        "~ /info : <b>Display user info</b>\n"
+        "~ /help : <b>Display available commands</b>\n"
     )
     update.message.reply_text(cmd_text, parse_mode=ParseMode.HTML)
 
@@ -979,7 +977,7 @@ def cmd(update: Update, context: CallbackContext) -> None:
 def sh_command(update: Update, context: CallbackContext):
     user_id = update.message.from_user.id
     if user_id not in approved_users:
-        update.message.reply_text("You are not authorized to use this bot.")
+        update.message.reply_text("You are not authorized to use this bot.\nDM @ZxhCarkecor for help.")
         return
 
     card_details_string = ' '.join(context.args)
@@ -1100,10 +1098,10 @@ def process_card(context, chat_id, message_id, card_status, idx, card_details, t
         time.sleep(1)
         webdriver.ActionChains(driver).send_keys(Keys.ENTER).perform()
         time.sleep(1)
-        webdriver.ActionChains(driver).send_keys('Gulshan').perform()
+        webdriver.ActionChains(driver).send_keys('Jembod').perform()
         webdriver.ActionChains(driver).send_keys(Keys.ENTER).perform()
         time.sleep(1)
-        webdriver.ActionChains(driver).send_keys('dwe.cloud@gmail.com').perform()
+        webdriver.ActionChains(driver).send_keys('malasicikiwir@gmail.com').perform()
         webdriver.ActionChains(driver).send_keys(Keys.ENTER).perform()
         time.sleep(1)
         webdriver.ActionChains(driver).send_keys('A').perform()
@@ -1136,22 +1134,21 @@ def process_card(context, chat_id, message_id, card_status, idx, card_details, t
     update_message(context, chat_id, message_id, card_status)
 
 def update_message(context, chat_id, message_id, card_status):
-    message_text = "🔐 **Gateway:** Stripe 0.5$ Mass Charge\n\n"
+    message_text = "🔐 *Stripe 0.5$ Mass Charge*\n\n"
     for status in card_status:
         message_text += (
-            f"💳 **CC:** `{status['card']}`\n"
-            f"🏦 **Issuer:** `{status['issuer']}`\n"
-            f"🌍 **Country:** `{status['country']}`\n"
-            f"📊 **Progress:** `{status['progress_bar']}`\n"
-            f"📋 **Result:** `{status['result']}`\n"
-            f"─────────────────────────────\n\n"
+            f"💳 *CC:* `{status['card']}`\n"
+            f"🏦 *Issuer:* `{status['issuer']}`\n"
+            f"🌍 *Country:* `{status['country']}`\n"
+            f"📊 *Progress:* `{status['progress_bar']}`\n"
+            f"📋 *Result:* `{status['result']}`\n\n"
         )
     context.bot.edit_message_text(chat_id=chat_id, message_id=message_id, text=message_text, parse_mode=ParseMode.MARKDOWN)
 
 def check_credit_card(update: Update, context: CallbackContext) -> None:
     user_id = update.message.from_user.id
     if user_id not in approved_users:
-        update.message.reply_text("You are not authorized to use this bot.")
+        update.message.reply_text("You are not authorized to use this bot.\nDM @ZxhCarkecor for help.")
         return
     chat_id = update.message.chat_id
     if context.args:
@@ -1173,13 +1170,12 @@ def check_credit_card(update: Update, context: CallbackContext) -> None:
             'result': '🔄 Checking...'
         })
 
-    initial_message = "🔐 **Gateway:** Stripe 0.5$ Mass Charge\n\n" + "\n".join([
-        f"💳 **CC:** `{status['card']}`\n"
-        f"🏦 **Issuer:** `{status['issuer']}`\n"
-        f"🌍 **Country:** `{status['country']}`\n"
-        f"📊 **Progress:** `{status['progress_bar']}`\n"
-        f"📋 **Result:** `{status['result']}`\n"
-        f"─────────────────────────────\n" for status in card_status
+    initial_message = "🔐 *Stripe 0.5$ Mass Charge*\n\n" + "\n".join([
+        f"💳 *CC:* `{status['card']}`\n"
+        f"🏦 *Issuer:* `{status['issuer']}`\n"
+        f"🌍 *Country:* `{status['country']}`\n"
+        f"📊 *Progress:* `{status['progress_bar']}`\n"
+        f"📋 *Result:* `{status['result']}`\n" for status in card_status
     ])
     message = context.bot.send_message(chat_id=chat_id, text=initial_message, parse_mode=ParseMode.MARKDOWN)
     message_id = message.message_id
@@ -1211,7 +1207,7 @@ def payu_process_donation(update: Update, context: CallbackContext, card_details
 
 🚀 *Progress:* {progress}
 
-🤖 *Bot by:* @Dwoscloud
+🤖 *Bot by:* @ZxhCarkecor
     """
 
     final_message_template = f"""
@@ -1223,7 +1219,7 @@ def payu_process_donation(update: Update, context: CallbackContext, card_details
 
 📊 *Result:* {{result}}
 
-🤖 *Bot by:* @Dwoscloud
+🤖 *Bot by:* @ZxhCarkecor
     """
 
     # Send initial message
@@ -1418,7 +1414,7 @@ def payu_process_donation(update: Update, context: CallbackContext, card_details
 def payu_donate_command(update: Update, context: CallbackContext):
     user_id = update.message.from_user.id
     if user_id not in approved_users:
-        update.message.reply_text("You are not authorized to use this bot.")
+        update.message.reply_text("You are not authorized to use this bot.\nDM @ZxhCarkecor for help")
         return
 
     card_details_string = ' '.join(context.args)
@@ -1430,18 +1426,18 @@ def payu_donate_command(update: Update, context: CallbackContext):
 
     threading.Thread(target=payu_process_donation, args=(update, context, card_details)).start()
 def main():
-    updater = Updater('BOT_TOKEN', use_context=True)
+    updater = Updater(btoken, use_context=True)
     dp = updater.dispatcher
     dp.add_handler(CommandHandler("c", cc_command))
     dp.add_handler(CommandHandler("approve", approve_command))
     dp.add_handler(CommandHandler("revoke", revoke_command))
     dp.add_handler(CommandHandler("pp", pp_command))  # Add the /pp command handler
-    dp.add_handler(CommandHandler("rz", donatekart_command))
+    # dp.add_handler(CommandHandler("rz", donatekart_command))
     dp.add_handler(CommandHandler("mchk", check_credit_card, pass_args=True))
     dp.add_handler(CommandHandler("sh", sh_command))
-    dp.add_handler(CommandHandler("py", payu_donate_command))
+    # dp.add_handler(CommandHandler("py", payu_donate_command))
     dp.add_handler(CommandHandler("info",info))
-    dp.add_handler(CommandHandler("cmd", cmd))
+    dp.add_handler(CommandHandler("help", cmd))
     dp.add_handler(CommandHandler("start",start))
 
     ping_thread = threading.Thread(target=send_ping)

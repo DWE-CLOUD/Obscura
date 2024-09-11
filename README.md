@@ -10,8 +10,6 @@ Welcome to **`Project Obscura`**. An advanced, tech-forward Telegram bot designe
   - **Stripe**
   - **PayPal**
   - **Shopify**
-  - **Razorpay**
-  - **PayU**
   - **Mass Stripe**
   
 - **⚡ Asynchronous Operations**: Execute multiple payment operations simultaneously with asynchronous handling, ensuring high efficiency and speed.
